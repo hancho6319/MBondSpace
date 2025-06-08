@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/app": "^0.13.1",
     "@firebase/auth": "^1.10.6",
     "@firebase/firestore": "^4.7.17",
     "@firebase/storage": "^0.13.12",
@@ -13,6 +14,7 @@
     "firebase": "^11.9.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },

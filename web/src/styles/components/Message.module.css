@@ -1,0 +1,222 @@
+.message {
+  max-width: 80%;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.currentUser {
+  margin-left: auto;
+}
+
+.replyPreview {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-left: 3px solid var(--primary);
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.messageContent {
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background-color: #f1f5f9;
+  position: relative;
+}
+
+.currentUser .messageContent {
+  background-color: var(--primary);
+  color: white;
+}
+
+.senderInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.senderAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  object-fit: cover;
+}
+
+.senderName {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.messageBody {
+  word-wrap: break-word;
+}
+
+.messageText {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.attachmentContainer {
+  margin-top: 0.5rem;
+}
+
+.attachmentImage {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.attachmentImage:hover {
+  transform: scale(1.02);
+}
+
+.fileAttachment {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.currentUser .fileAttachment {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.fileAttachment:hover {
+  background-color: var(--background);
+}
+
+.fileIcon {
+  margin-right: 0.75rem;
+  color: var(--primary);
+}
+
+.fileIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.fileInfo {
+  flex: 1;
+}
+
+.fileName {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.voiceNote {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  margin-top: 0.5rem;
+}
+
+.currentUser .voiceNote {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.playButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.playButton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.voiceDuration {
+  margin: 0 0.75rem;
+  font-size: 0.8rem;
+  min-width: 40px;
+}
+
+.voiceWaveform {
+  display: flex;
+  align-items: flex-end;
+  height: 40px;
+  flex: 1;
+  gap: 2px;
+}
+
+.voiceBar {
+  width: 3px;
+  background-color: var(--primary);
+  border-radius: 2px;
+}
+
+.currentUser .voiceBar {
+  background-color: white;
+}
+
+.messageMeta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.messageTime {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.messageOptions {
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+.optionButton {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.optionButton:hover {
+  opacity: 1;
+}
+
+.optionButton svg {
+  width: 14px;
+  height: 14px;
+}

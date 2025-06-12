@@ -1,0 +1,146 @@
+.container {
+  position: relative;
+  margin-left: auto;
+}
+
+.bellButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+  padding: 5px;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 350px;
+  max-height: 500px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 1000;
+  margin-top: 10px;
+}
+
+.dropdownHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdownHeader h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.markAllRead {
+  background: none;
+  border: none;
+  color: #4a6cf7;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.empty {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.notificationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notificationItem {
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notificationItem:hover {
+  background: #f9f9f9;
+}
+
+.notificationItem.unread {
+  background: #f8f9ff;
+}
+
+.notificationAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+  float: left;
+}
+
+.notificationContent {
+  margin-left: 50px;
+}
+
+.notificationHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.notificationTime {
+  color: #999;
+  font-size: 12px;
+}
+
+.notificationMessage {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.notificationActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acceptButton {
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.declineButton {
+  background: #f1f1f1;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}

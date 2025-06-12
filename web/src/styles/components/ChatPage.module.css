@@ -1,0 +1,224 @@
+.chatPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chatContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.messagesContainer {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: var(--background);
+}
+
+.inputContainer {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  background-color: var(--surface);
+}
+
+.replyPreview {
+  background-color: #e0e7ff;
+  border-left: 3px solid var(--primary);
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.replyContent {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cancelReply {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.inputArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.attachmentButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.attachmentButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.attachmentButton svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+}
+
+.recordButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.recordButton svg {
+  width: 18px;
+  height: 18px;
+  color: var(--error);
+}
+
+.recordButtonActive {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #fee2e2;
+  color: var(--error);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.recordingIndicator {
+  width: 12px;
+  height: 12px;
+  background-color: var(--error);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.messageInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.sendButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sendButton:disabled {
+  background-color: #c7d2fe;
+  cursor: not-allowed;
+}
+
+.sendButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.attachmentPreview {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: var(--background);
+  border-radius: 0.5rem;
+}
+
+.imagePreview {
+  position: relative;
+  width: 150px;
+}
+
+.previewImage {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.removeAttachment {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.voicePreview {
+  display: flex;
+  align-items: center;
+}
+
+.voiceInfo {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filePreview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fileIcon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e7ff;
+  border-radius: 0.5rem;
+}
+
+.fileIcon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+
+.fileInfo {
+  flex: 1;
+}

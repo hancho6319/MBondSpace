@@ -1,0 +1,129 @@
+.eventList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.eventItem {
+  display: flex;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s;
+}
+
+.eventItem:hover {
+  background-color: var(--background);
+}
+
+.eventDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  margin-right: 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
+
+.dateDay {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dateMonth {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.eventContent {
+  flex: 1;
+}
+
+.eventTitle {
+  font-size: 1.125rem;
+  margin: 0 0 0.5rem;
+}
+
+.eventTitle a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.eventTitle a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.eventTime,
+.eventLocation {
+  margin: 0 0 0.25rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.eventMeta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.eventActions {
+  display: flex;
+  align-items: center;
+}
+
+.editButton {
+  padding: 0.375rem 0.75rem;
+  background-color: var(--background);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton:hover {
+  background-color: rgba(79, 70, 229, 0.1);
+}
+
+@media (max-width: 640px) {
+  .eventItem {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .eventDate {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-right: 0;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.5rem;
+    width: fit-content;
+  }
+
+  .dateDay {
+    font-size: 1rem;
+  }
+
+  .dateMonth {
+    font-size: 0.75rem;
+  }
+
+  .eventMeta {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .eventActions {
+    margin-top: 1rem;
+  }
+}

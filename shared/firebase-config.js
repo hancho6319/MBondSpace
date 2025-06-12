@@ -1,74 +1,80 @@
+// shared/firebase-config.js
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  onAuthStateChanged,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import {
   getFirestore,
   collection,
-  limit,
   doc,
   setDoc,
   getDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove,
   query,
   where,
-  orderBy,
-  onSnapshot,
+  getDocs,
   addDoc,
+  onSnapshot,
   serverTimestamp,
   deleteDoc,
-  getDocs
+  orderBy,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+// Your Firebase config (same for both web and mobile)
 const firebaseConfig = {
-  apiKey: "AIzaSyBrNqmh5XGBO2LX62d-w2ur2LeuQskPxzQ",
-  authDomain: "mbondspace-6eeee.firebaseapp.com",
-  projectId: "mbondspace-6eeee",
-  storageBucket: "mbondspace-6eeee.appspot.com", // Changed from .firebasestorage.app to .appspot.com
-  messagingSenderId: "420546664896",
-  appId: "1:420546664896:web:1c2888874a7e01729e9025",
-  measurementId: "G-KTR43N3D7Q"
+  apiKey: "AIzaSyAQF7cjyi9FK_okdcszyXGYVbxXT3CYCgY",
+  authDomain: "mbondspace-9eb0d.firebaseapp.com",
+  projectId: "mbondspace-9eb0d",
+  storageBucket: "mbondspace-9eb0d.firebasestorage.app",
+  messagingSenderId: "415798819059",
+  appId: "1:415798819059:web:7f24235a05f28149f89f86",
+  measurementId: "G-BWEQQRENRB",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// Initialize services
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
+// Export everything needed by both web and mobile
 export {
+  app,
   auth,
   db,
-  limit,
   storage,
+  // Auth
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  onAuthStateChanged,
   signOut,
+  onAuthStateChanged,
+  // Firestore
   collection,
   doc,
   setDoc,
   getDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove,
   query,
   where,
-  orderBy,
-  onSnapshot,
+  getDocs,
   addDoc,
+  onSnapshot,
   serverTimestamp,
+  deleteDoc,
+  orderBy,
+  // Storage
   ref,
   uploadBytes,
   getDownloadURL,
-  deleteDoc,
-  getDocs
 };

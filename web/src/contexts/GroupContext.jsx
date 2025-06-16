@@ -1,95 +1,64 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import {
-  getGroups,
-  createGroup,
-  deleteGroup,
-  addMember,
-  removeMember,
-} from "../services/groupService";
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useAuth } from './AuthContext';
+import { 
+  getGroups, 
+  createGroup as createGroupService, 
+  deleteGroup as deleteGroupService 
+} from '../services/groupService';
 
 const GroupContext = createContext();
 
 export function GroupProvider({ children }) {
+  const { currentUser } = useAuth();
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const refreshGroups = async () => {
+  const refreshGroups = useCallback(async () => {
     try {
       setLoading(true);
-      console.log("Attempting to load groups...");
-      const groupsData = await getGroups();
-      console.log("Groups data received:", groupsData);
-      setGroups(groupsData);
       setError(null);
+      
+      if (!currentUser?.uid) {
+        setGroups([]);
+        return;
+      }
+
+      const groupsData = await getGroups(currentUser.uid);
+      setGroups(groupsData);
     } catch (err) {
-      console.error("Detailed group load error:", {
-        message: err.message,
-        code: err.code,
-        stack: err.stack,
-      });
-      setError(`Failed to load groups: ${err.message}`);
+      console.error('Error loading groups:', err);
+      setError(err.message || 'Failed to load groups');
+      setGroups([]);
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleCreateGroup = async (groupData) => {
-    try {
-      const newGroup = await createGroup(groupData);
-      setGroups((prev) => [...prev, newGroup]);
-      return newGroup;
-    } catch (err) {
-      setError("Failed to create group");
-      throw err;
-    }
-  };
-
-  const handleDeleteGroup = async (groupId) => {
-    try {
-      await deleteGroup(groupId);
-      setGroups((prev) => prev.filter((g) => g.id !== groupId));
-    } catch (err) {
-      setError("Failed to delete group");
-      throw err;
-    }
-  };
-
-  const handleAddMember = async (groupId, userId) => {
-    try {
-      await addMember(groupId, userId);
-      setGroups((prev) =>
-        prev.map((group) =>
-          group.id === groupId
-            ? { ...group, members: [...group.members, userId] }
-            : group
-        )
-      );
-    } catch (err) {
-      setError("Failed to add member");
-      throw err;
-    }
-  };
-
-  const handleRemoveMember = async (groupId, userId) => {
-    try {
-      await removeMember(groupId, userId);
-      setGroups((prev) =>
-        prev.map((group) =>
-          group.id === groupId
-            ? { ...group, members: group.members.filter((m) => m !== userId) }
-            : group
-        )
-      );
-    } catch (err) {
-      setError("Failed to remove member");
-      throw err;
-    }
-  };
+  }, [currentUser]);
 
   useEffect(() => {
     refreshGroups();
-  }, []);
+  }, [refreshGroups]);
+
+  const createGroup = async (groupData) => {
+    try {
+      const newGroup = await createGroupService(groupData);
+      setGroups(prev => [...prev, newGroup]);
+      return newGroup;
+    } catch (err) {
+      console.error('Error creating group:', err);
+      throw err;
+    }
+  };
+
+  const deleteGroup = async (groupId) => {
+    try {
+      await deleteGroupService(groupId);
+      setGroups(prev => prev.filter(g => g.id !== groupId));
+    } catch (err) {
+      console.error('Error deleting group:', err);
+      throw err;
+    }
+  };
 
   return (
     <GroupContext.Provider
@@ -98,10 +67,8 @@ export function GroupProvider({ children }) {
         loading,
         error,
         refreshGroups,
-        createGroup: handleCreateGroup,
-        deleteGroup: handleDeleteGroup,
-        addMember: handleAddMember,
-        removeMember: handleRemoveMember,
+        createGroup,
+        deleteGroup
       }}
     >
       {children}

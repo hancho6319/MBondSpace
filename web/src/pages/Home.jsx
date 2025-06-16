@@ -113,10 +113,10 @@ export default function Home() {
             Join thousands of communities already using MBondSpace to collaborate effectively
           </p>
           <Link 
-            to={currentUser ? "/groups" : "/auth"} 
+            to={currentUser ? "/events" : "/auth"} 
             className={styles.ctaButton}
           >
-            {currentUser ? "Go to Dashboard" : "Sign Up Now"}
+            {currentUser ? "Go to Events" : "Sign Up Now"}
           </Link>
         </div>
       </section>

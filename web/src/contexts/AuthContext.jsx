@@ -5,12 +5,31 @@ import { auth } from '../services/firebase';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({
+    uid: null,
+    email: null,
+    displayName: null,
+    emailVerified: false
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser({
+          uid: user.uid,
+          email: user.email || '',
+          displayName: user.displayName || '',
+          emailVerified: user.emailVerified || false
+        });
+      } else {
+        setCurrentUser({
+          uid: null,
+          email: null,
+          displayName: null,
+          emailVerified: false
+        });
+      }
       setLoading(false);
     });
     return unsubscribe;
@@ -18,7 +37,8 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    loading
+    loading,
+    isAuthenticated: !!currentUser?.uid
   };
 
   return (
@@ -29,5 +49,9 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 }

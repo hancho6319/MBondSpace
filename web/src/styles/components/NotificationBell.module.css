@@ -1,30 +1,39 @@
 .container {
   position: relative;
-  margin-left: auto;
+  margin-left: 1rem;
 }
 
 .bellButton {
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
   position: relative;
-  padding: 5px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bellIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-primary);
 }
 
 .badge {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background: #ff4757;
+  top: 0;
+  right: 0;
+  background-color: var(--primary);
   color: white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
 .dropdown {
@@ -32,40 +41,43 @@
   right: 0;
   top: 100%;
   width: 350px;
-  max-height: 500px;
+  max-height: 70vh;
   overflow-y: auto;
-  background: white;
+  background-color: var(--surface);
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  margin-top: 10px;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border);
 }
 
 .dropdownHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #eee;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .dropdownHeader h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 1rem;
+  color: var(--text-primary);
 }
 
 .markAllRead {
   background: none;
   border: none;
-  color: #4a6cf7;
+  color: var(--primary);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
 }
 
 .empty {
-  padding: 20px;
+  padding: 1.5rem;
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .notificationList {
@@ -75,72 +87,106 @@
 }
 
 .notificationItem {
-  padding: 15px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .notificationItem:hover {
-  background: #f9f9f9;
+  background-color: var(--background);
 }
 
 .notificationItem.unread {
-  background: #f8f9ff;
-}
-
-.notificationAvatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-  float: left;
+  background-color: rgba(74, 108, 247, 0.05);
 }
 
 .notificationContent {
-  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .notificationHeader {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--background);
 }
 
 .notificationTime {
-  color: #999;
-  font-size: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .notificationMessage {
   margin: 0;
-  color: #333;
-  font-size: 14px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .notificationActions {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
-.acceptButton {
-  background: #4a6cf7;
+.seenButton, .ignoreButton {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: none;
+}
+
+.seenButton {
+  background-color: var(--primary);
   color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
 }
 
-.declineButton {
-  background: #f1f1f1;
-  color: #333;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
+.ignoreButton {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .dropdown {
+    position: fixed;
+    top: 75px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 50vh;
+    border-radius: 12px 12px 0 0;
+    margin-top: 0;
+  }
+
+  .container {
+    margin-left: 0.5rem;
+  }
 }

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { 
   collection,
-  orderBy,
   db,
+  orderBy,
   query,
   where,
   onSnapshot,
@@ -22,7 +22,6 @@ export default function Events() {
   const [events, setEvents] = useState([]);
   const [activeTab, setActiveTab] = useState('upcoming');
   const [showForm, setShowForm] = useState(false);
-
   const [viewMode, setViewMode] = useState('list');
 
   useEffect(() => {
@@ -66,7 +65,13 @@ export default function Events() {
       setShowForm(false);
     } catch (error) {
       console.error('Error creating event:', error);
+      throw error;
     }
+  };
+
+  const handleEventClick = (event) => {
+    // Implement event detail view or modal
+    console.log('Event clicked:', event);
   };
 
   return (
@@ -108,13 +113,13 @@ export default function Events() {
         <div className={styles.toggleOptions}>
           <span className={styles.toggleLabel}>View:</span>
           <button 
-            className={`${styles.toggleOption} ${styles.calendarView}`}
+            className={`${styles.toggleOption} ${viewMode === 'calendar' ? styles.active : ''}`}
             onClick={() => setViewMode('calendar')}
           >
             Calendar
           </button>
           <button 
-            className={`${styles.toggleOption} ${styles.listView}`}
+            className={`${styles.toggleOption} ${viewMode === 'list' ? styles.active : ''}`}
             onClick={() => setViewMode('list')}
           >
             List
@@ -127,10 +132,7 @@ export default function Events() {
           <EventCalendar 
             groupId={groupId} 
             events={events} 
-            onEventClick={(event) => {
-              // Handle event click (show details modal, etc.)
-              console.log('Event clicked:', event);
-            }}
+            onEventClick={handleEventClick}
           />
         </div>
       ) : (

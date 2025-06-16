@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useGroups } from '../contexts/GroupContext';
 import styles from '../styles/components/GroupForm.module.css';
 
-export default function GroupForm({ onClose }) {
+export default function GroupForm({ onSubmit, onClose }) {
   const { currentUser } = useAuth();
-  const { createGroup } = useGroups();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
@@ -13,107 +11,78 @@ export default function GroupForm({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setError('');
+
     if (!name.trim()) {
       setError('Group name is required');
       return;
     }
 
+    if (!currentUser?.uid) {
+      setError('You must be logged in to create a group');
+      return;
+    }
+
     setIsSubmitting(true);
-    setError('');
 
     try {
-      const newGroup = {
+      await onSubmit({
         name: name.trim(),
         description: description.trim(),
         admin: currentUser.uid,
         members: [currentUser.uid],
-        createdAt: new Date(),
-        photoURL: currentUser.photoURL || ''
-      };
-
-      await createGroup(newGroup);
-      
-      // Clear form
-      setName('');
-      setDescription('');
-      
-      if (onClose) onClose();
+        createdAt: new Date()
+      });
     } catch (err) {
-      console.error('Error creating group:', err);
-      setError('Failed to create group. Please try again.');
+      setError(err.message || 'Failed to create group');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.groupForm}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.formHeader}>
-        <h3>Create New Group</h3>
-        {onClose && (
-          <button 
-            type="button" 
-            onClick={onClose}
-            className={styles.closeButton}
-            aria-label="Close form"
-          >
-            &times;
-          </button>
-        )}
+        <h2>Create New Group</h2>
+        <button type="button" onClick={onClose} className={styles.closeButton}>
+          &times;
+        </button>
       </div>
-      
-      {error && (
-        <div className={styles.errorMessage}>
-          {error}
-        </div>
-      )}
+
+      {error && <div className={styles.error}>{error}</div>}
 
       <div className={styles.formGroup}>
-        <label htmlFor="group-name">
-          Group Name *
-        </label>
+        <label htmlFor="name">Group Name *</label>
         <input
+          id="name"
           type="text"
-          id="group-name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter group name"
           required
           maxLength={50}
         />
-        <span className={styles.charCount}>{name.length}/50</span>
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="group-description">
-          Description
-        </label>
+        <label htmlFor="description">Description</label>
         <textarea
-          id="group-description"
+          id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="What's this group about?"
           rows={3}
           maxLength={200}
         />
-        <span className={styles.charCount}>{description.length}/200</span>
       </div>
 
       <div className={styles.formActions}>
         <button
           type="submit"
-          className={styles.submitButton}
           disabled={isSubmitting || !name.trim()}
+          className={styles.submitButton}
         >
-          {isSubmitting ? (
-            <>
-              <span className={styles.spinner}></span>
-              Creating...
-            </>
-          ) : (
-            'Create Group'
-          )}
+          {isSubmitting ? 'Creating...' : 'Create Group'}
         </button>
       </div>
     </form>

@@ -1,86 +1,52 @@
 import { Link } from 'react-router-dom';
-import { useGroups } from '../contexts/GroupContext';
-import UserAvatar from './UserAvatar';
 import styles from '../styles/components/GroupCard.module.css';
 
-export default function GroupCard({ group, currentUserId }) {
-  const { deleteGroup } = useGroups();
+export default function GroupCard({ group, currentUserId, onDelete }) {
   const isAdmin = group.admin === currentUserId;
-  
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (window.confirm('Are you sure you want to delete this group?')) {
-      try {
-        await deleteGroup(group.id);
-      } catch (error) {
-        console.error('Failed to delete group:', error);
-        alert('Failed to delete group. Please try again.');
-      }
-    }
-  };
 
   return (
-    <Link to={`/chat/${group.id}`} className={styles.groupCard}>
-      <div className={styles.cardHeader}>
-        <div className={styles.avatarContainer}>
+    <div className={styles.card}>
+      <Link to={`/chat/${group.id}`} className={styles.cardLink}>
+        <div className={styles.cardHeader}>
           {group.photoURL ? (
-            <img 
-              src={group.photoURL} 
-              alt={group.name} 
-              className={styles.groupAvatar}
-            />
+            <img src={group.photoURL} alt={group.name} className={styles.avatar} />
           ) : (
             <div className={styles.avatarPlaceholder}>
-              {group.name.charAt(0)}
+              {group.name.charAt(0).toUpperCase()}
             </div>
           )}
+          <div className={styles.groupInfo}>
+            <h3 className={styles.groupName}>{group.name}</h3>
+            <p className={styles.groupDescription}>
+              {group.description || 'No description'}
+            </p>
+          </div>
         </div>
-        <div className={styles.groupInfo}>
-          <h3 className={styles.groupName}>{group.name}</h3>
-          <p className={styles.groupDescription}>{group.description}</p>
+      </Link>
+
+      <div className={styles.cardFooter}>
+        <div className={styles.metaInfo}>
+          <span className={styles.memberCount}>
+            {group.members.length} member{group.members.length !== 1 ? 's' : ''}
+          </span>
+          <span className={styles.adminBadge}>
+            {isAdmin ? 'Admin' : 'Member'}
+          </span>
         </div>
-      </div>
-      
-      <div className={styles.cardStats}>
-        <div className={styles.statItem}>
-          <span className={styles.statValue}>{group.members.length}</span>
-          <span className={styles.statLabel}>Members</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statValue}>24</span>
-          <span className={styles.statLabel}>Messages</span>
-        </div>
-      </div>
-      
-      <div className={styles.cardActions}>
-        <div className={styles.membersPreview}>
-          {group.members.slice(0, 3).map((memberId, index) => (
-            <div 
-              key={index} 
-              className={styles.memberAvatar}
-              style={{ zIndex: 3 - index, marginLeft: index > 0 ? '-10px' : 0 }}
-            >
-              <UserAvatar userId={memberId} size="small" />
-            </div>
-          ))}
-          {group.members.length > 3 && (
-            <div className={styles.moreMembers}>
-              +{group.members.length - 3}
-            </div>
-          )}
-        </div>
-        
         {isAdmin && (
           <button 
             className={styles.deleteButton}
-            onClick={handleDelete}
+            onClick={(e) => {
+              e.preventDefault();
+              if (window.confirm('Delete this group permanently?')) {
+                onDelete(group.id);
+              }
+            }}
           >
             Delete
           </button>
         )}
       </div>
-    </Link>
+    </div>
   );
 }

@@ -1,0 +1,87 @@
+.calendarContainer {
+  height: 600px;
+  padding: 1rem;
+  background-color: var(--surface);
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  padding: 0.75rem;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-radius: 0.25rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.loading {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  padding: 0.75rem;
+  background-color: #e0e7ff;
+  color: #4a6cf7;
+  border-radius: 0.25rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.googleAuthContainer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1;
+}
+
+.googleAuthButton {
+  padding: 0.5rem 1rem;
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.googleAuthButton:hover {
+  background-color: #3367D6;
+}
+
+.rbc-event {
+  padding: 2px 5px;
+  font-size: 0.875rem;
+}
+
+.rbc-month-view {
+  height: 100%;
+}
+
+.rbc-time-view {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .calendarContainer {
+    height: 400px;
+  }
+  
+  .googleAuthContainer {
+    position: static;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .googleAuthButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,105 +1,243 @@
-.chatContainer {
+.chatPage {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: var(--background);
+  background-color: #f5f5f5;
 }
 
-/* Header styles are in GroupHeader.module.css */
+.errorMessage {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+}
+
+.loading {
+  padding: 2rem;
+  text-align: center;
+  color: #4b5563;
+}
+
+.error {
+  padding: 2rem;
+  text-align: center;
+  color: #dc2626;
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
 
 .messagesContainer {
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  background-color: var(--surface);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  background-color: #ffffff;
 }
 
-.noMessages {
+.inputContainer {
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.replyPreview {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #e0e7ff;
+  border-left: 3px solid #4f46e5;
+  border-radius: 0.25rem;
+}
+
+.replyContent {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #4f46e5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cancelReply {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 1.25rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.inputArea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.attachmentButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.attachmentButton {
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  color: var(--text-secondary);
-  text-align: center;
-  padding: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #f3f4f6;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.noMessages p:first-child {
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.messageForm {
-  display: flex;
-  padding: 1rem;
-  background-color: var(--surface);
-  border-top: 1px solid var(--border);
+.attachmentButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #4b5563;
 }
 
 .messageInput {
   flex: 1;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
   font-size: 1rem;
-  transition: border-color 0.2s;
-  background-color: var(--background);
-  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .messageInput:focus {
-  outline: none;
-  border-color: var(--primary);
-}
-
-.messageInput:disabled {
-  background-color: var(--border);
-  cursor: not-allowed;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
 .sendButton {
-  margin-left: 1rem;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--primary);
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #4f46e5;
+  color: #ffffff;
   border: none;
-  border-radius: 1.5rem;
-  font-weight: 500;
+  border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.sendButton:hover:not(:disabled) {
-  background-color: var(--primary-dark);
-}
-
 .sendButton:disabled {
-  background-color: var(--border);
+  background-color: #a5b4fc;
   cursor: not-allowed;
 }
 
-.loading,
-.notFound {
+.sendButton:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.sendingSpinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.attachmentPreview {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.imagePreview {
+  position: relative;
+  width: 150px;
+}
+
+.previewImage {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.removeAttachment {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  font-size: 1.25rem;
-  color: var(--text-primary);
+  cursor: pointer;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .messageForm {
+.filePreview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fileIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e7ff;
+  border-radius: 0.5rem;
+}
+
+.fileIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #4f46e5;
+}
+
+.fileInfo {
+  flex: 1;
+}
+
+.fileName {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileSize {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .messagesContainer {
+    padding: 0.5rem;
+  }
+  
+  .inputContainer {
     padding: 0.75rem;
   }
-
+  
+  .attachmentButton,
   .sendButton {
-    padding: 0.75rem 1rem;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }
